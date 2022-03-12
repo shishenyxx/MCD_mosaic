@@ -1,4 +1,4 @@
-# MosaicHunter single mode pipeline for WES or MPAS or any targeted sequencing
+# MosaicHunter single mode pipeline for WES or MPAS or any targeted sequencing data
 
 The pipeline is basically following the [MosaicHunter user guide](https://github.com/zzhang526/MosaicHunter/blob/master/docs/MosaicHunterUserGuide.pdf). This Snakefile is a wrapper for the discover phase of MosaicHunter single mode for WES and MPAS and any targeted sequencing data.
 
