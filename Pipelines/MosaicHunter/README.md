@@ -1,6 +1,6 @@
 # MosaicHunter single mode pipeline for WES or MPAS or any targeted sequencing
 
-The pipeline is basically following the [MosaicHunter user guide](https://github.com/zzhang526/MosaicHunter/blob/master/docs/MosaicHunterUserGuide.pdf)
+The pipeline is basically following the [MosaicHunter user guide](https://github.com/zzhang526/MosaicHunter/blob/master/docs/MosaicHunterUserGuide.pdf). This Snakefile is a wrapper for the discover phase of MosaicHunter single mode for WES and MPAS and any targeted sequencing data.
 
 ## 1. The first step is running the parameter_properties and estimate the depth, alpha and beta for the beta-binomial model.
 
