@@ -1,0 +1,225 @@
+configfile: "snake_conf.yaml"
+
+def get_samples():
+    samples = {}
+    depths = set()
+    with open(config["input_paths"], "r") as f:
+        for line in f:
+            if line.startswith("#"):
+               continue
+            id, sex, path= line.rstrip().split("\t")
+            samples[id] = [sex, path]
+    return samples
+
+def generate_indel_bed(input, output):
+    import gzip
+    wfile = open(str(output), "w")
+    with gzip.open(str(input), "rt") as f:
+        for line in f:
+            if line.startswith("#"):
+                continue
+            line = line.rstrip().split("\t")
+            if len(line[3])*len(line[4]) != 1:
+                continue
+            chrom = line[0]
+            pos_1 = str(int(line[1])-5)
+            pos_2 = str(int(line[1])+5)
+            wfile.write(chrom + "\t" + pos_1 + "\t" + pos_2 + "\n")
+    wfile.close()
+
+
+
+
+def get_alpha_beta(filename):
+    alpha = 0
+    beta = 0
+    with open(filename, "r") as f:
+        for line in f:
+            if line.startswith("alpha"):
+                alpha = int(line.rstrip().split(": ")[-1])    
+            if line.startswith("beta"):
+                beta = int(line.rstrip().split(": ")[-1])
+    if alpha <= 0 or beta <= 0:
+        alpha = 80 
+        beta = 80
+    return alpha, beta
+  
+def write_file(wfile_name, rfile_list):
+    wfile_name = str(wfile_name)
+    print(wfile_name)
+    wfile = open(wfile_name, "w") 
+    for rfile_name in rfile_list:
+        with open(str(rfile_name), "r") as file:
+            for line in file:
+            	wfile.write(line)
+    wfile.close()
+
+def convert_tsv_to_vcf(input, output):
+    import pandas as pd
+    import numpy as np
+    chrom = []
+    pos = []
+    ref = []
+    alt = []
+    id = []
+    qual = []
+    filter = []
+    info = []
+    format = []
+    score = []
+    with open(str(input), "r") as f:
+        for line in f:
+            line = line.rstrip().split("\t")
+            if line[2] == line[6] or line[2] == line[8]:
+                chrom.append(line[0])
+                pos.append(line[1])
+                id.append(".")
+                ref.append(line[2])
+                qual.append(".")
+                filter.append(".")
+                info.append(".")
+                format.append("RAO:RAE:RIO:RM:LAO:LAE:LIO:LM:PMO:PME:PIO:PM:MP")
+                scores = []
+                for j in range(11, 24):
+                    scores.append(str(line[j]))
+                score.append(":".join(scores))
+                if line[6] == line[2]:
+                    alt.append(line[8])
+                else:
+                    alt.append(line[6])
+    chrom = np.array(chrom)
+    pos = np.array(pos)
+    id = np.array(id)
+    ref = np.array(ref)
+    alt = np.array(alt)
+    qual = np.array(qual)
+    filter = np.array(filter)
+    info = np.array(info)
+    format = np.array(format)
+    score = np.array(score)
+    arrays = np.vstack((chrom, pos,id, ref, alt, qual, filter, info, format, score)).T
+    colnames = ["#CHROM", "POS", "ID", "REF", "ALT", "QUAL", "FILTER", "INFO", "FORMAT", "SCORE"]         
+    df = pd.DataFrame(arrays, columns=colnames)
+    df.to_csv(str(output),index=False, sep="\t")
+
+
+
+
+SAMPLES = get_samples()
+print(SAMPLES)
+CHROMS = [str(x) for x in range(1,23)] + ["X", "Y"]
+
+
+JAVA = config["java"]
+MOSAIC_HUNTER = config["mosaic_hunter"]
+BAMTOOLS = config["bamtools"]
+
+OUT_DIR = config["out_dir"]
+
+PROPERTIES = config["properties"]
+PARAM_PROPERTIES = config["param_properties"]
+
+INDEL_BED = config["indel_bed"]
+DBSNP_FILE = config["dbsnp_file"]
+ERROR_PRONE_BED = config["error_prone_bed"]
+REPETITIVE_REGION_BED = config["repetitive_region_bed"]
+REF_FASTA = config["ref_fasta"]
+
+#VEP = config["vep"]
+#VEP_DIR = config["vep_dir"]
+#VEP_ASSEMBLY = config["vep_assembly"]
+#GNOMAD = config["gnomad"]
+
+
+localrules: all 
+#combine_tsv_files, rewrite_tsv_files, generate_indel_beds,process_results
+
+rule all:
+    input:
+        expand(OUT_DIR + "/results/{sample}/final.passed.tsv", sample=SAMPLES.keys())
+
+
+
+rule run_params:
+    input:
+        bam = lambda wildcards: SAMPLES[wildcards.sample][1]
+    output:
+        OUT_DIR + "/params_logs/{sample}.mosaichunter.parameters.log"
+    params:
+        sex = lambda wildcards: SAMPLES[wildcards.sample][0],
+        cluster = "-q home -M 'xiy010@health.ucsd.edu' -l nodes=1:ppn=28,mem=128g -l walltime=48:00:00"
+    shell:
+        "{JAVA} -Xms120G -Xmx120G -jar {MOSAIC_HUNTER}"
+        "    -C {PARAM_PROPERTIES}"
+        "    -P heterozygous_filter.sex={params.sex}"
+        "    -P common_site_filter.bed_file={ERROR_PRONE_BED}"
+        "    -P repetitive_region_filter.bed_file={REPETITIVE_REGION_BED}"
+        "    -P input_file={input.bam}"
+        "    -P reference_file={REF_FASTA} > {output};"
+
+rule run_single_mode:
+    input:
+        bam = lambda wildcards: SAMPLES[wildcards.sample][1],
+        log = OUT_DIR +"/params_logs/{sample}.mosaichunter.parameters.log",
+    output:
+        log = OUT_DIR + "/single_mode_logs/{sample}.mosaichunter.single_mode.log",
+        tsv = OUT_DIR + "/results/{sample}/final.passed.tsv"
+    params:
+        sex = lambda wildcards: SAMPLES[wildcards.sample][0],
+        dir = OUT_DIR + "/results/{sample}/",
+        cluster = "-q home -M 'xiy010@health.ucsd.edu' -l nodes=1:ppn=28,mem=128g -l walltime=48:00:00",
+    run:
+        alpha, beta = get_alpha_beta(input.log)
+        shell(
+        "module load blat;"
+        "{JAVA} -Xms120G -Xmx120G -jar {MOSAIC_HUNTER}"
+        "    -C {PROPERTIES} "
+        "    -P input_file={input.bam}"
+        "    -P reference_file={REF_FASTA}"
+        "    -P mosaic_filter.dbsnp_file={DBSNP_FILE}"
+        "    -P indel_region_filter.bed_file={INDEL_BED}"
+        "    -P common_site_filter.bed_file={ERROR_PRONE_BED}"
+        "    -P repetitive_region_filter.bed_file={REPETITIVE_REGION_BED}"
+        "    -P mosaic_filter.mode=single"
+        "    -P mosaic_filter.alpha_param={alpha}"
+        "    -P mosaic_filter.beta_param={beta} "
+        "    -P mosaic_filter.sex={params.sex}"
+        "    -P output_dir={params.dir}"
+        "    > {output.log}")
+
+
+
+'''
+rule process_results:
+    input:
+        tsv = OUT_DIR + "/combined_tsv/{sample}.final.passed.tsv",
+    output:
+        vcf = OUT_DIR + "/processed/{sample}.final.passed.vcf"
+    run:
+        convert_tsv_to_vcf(input.tsv, output.vcf)
+
+
+
+rule annotate_vcf_mosaic_hunter:
+    input:
+        OUT_DIR + "/processed/{sample}.final.passed.vcf"
+    output:
+        OUT_DIR + "/annotated/{sample}.final.passed.vcf.gz"
+    params:
+        cluster = "-q home -l nodes=1:ppn=1 -l walltime=48:00:00"
+    shell:
+        "perl {VEP} --cache "
+        "    --force_overwrite "
+        "    --fork 4 "
+        "    --offline "
+        "    --assembly {VEP_ASSEMBLY} "
+        "    --dir {VEP_DIR} "
+        "    --vcf "
+        "    --flag_pick_allele "
+        "    --af_gnomad "
+        "    --af_1kg "
+        "    -custom {GNOMAD},gnomADg,vcf,exact,0,AF "
+        "    --no_stats "
+        "    --i {input} "
+        "    --o stdout | bgzip > {output} "
+'''
