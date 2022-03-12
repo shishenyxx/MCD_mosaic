@@ -15,7 +15,11 @@ Processed data from WES and MPAS were subjected to different pipelines and candi
 
 Passed variants were further annotated with [a pipeline we previously described](), and information including the COSMIC89, gnomAD genome, avsnp150, CADD 1.3, eigen value, and fathmm by ANNOVAR command `./table_annovar.pl input.avinput /humandb/ -buildver hg19 -out output_annotated -remove -protocol refGene,gnomad_genome,avsnp150,cosmic89,cadd13,eigen,fathmm -operation g,f,f,f,f,f,f -nastring .`.
 
+## 4. Plotting
+[Codes](https://github.com/shishenyxx/MCD_mosaic/tree/main/Plotting) and inputs for the plots in the project.
 
-## 4. Statistical analysis
+## 5. Statistical analysis
 
-## 5. Plotting
+[Codes](https://github.com/shishenyxx/MCD_mosaic/tree/main/Stastical_analysis) as well as some intermediate files and scripts for the statistical analysis of the project.
+
+
