@@ -1,5 +1,6 @@
 # MCD_mosaic
 Malformations of cortical development (MCD) are neurological conditions displaying focal disruption of cortical architecture and disrupted cellular organization that occurs during embryogenesis. This repository contains the pipelines for data processing, codes for data analysis and plotting for the large-scale MCD data analysis.
+Data for this project is available on NIMH Data Archive (NDA) under study 1484, and on NIMH Sequence Read Archive (SRA) under accession number PRJNA821916.
 
 ## 1. Pipelines for processing WES data
 The processing of the WES data followed the [BSMN common pipeline](https://github.com/bsmn/bsmn-pipeline), of which the WES part is described also in the [BSMN common experinment paper](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-021-02285-3). 
