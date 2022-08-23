@@ -1,1 +1,1 @@
-Pipeline for processing bam files.
+Snamekame pipeline for processing bam files.
