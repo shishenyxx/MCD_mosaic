@@ -54,7 +54,7 @@ Passed variants were further annotated with [a pipeline we previously described]
 
 -----------------------------------
 
-### 6.Contact:
+### 6. Contact:
 
 :email: Dr. Changuk Chung: [chchung@health.ucsd.edu](mailto:chchung@health.ucsd.edu)
 
