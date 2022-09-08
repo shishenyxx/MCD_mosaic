@@ -1,4 +1,7 @@
 # MCD_mosaic
+
+-----------------------------------
+
 Malformations of cortical development (MCD) are neurological conditions displaying focal disruption of cortical architecture and disrupted cellular organization that occurs during embryogenesis. This repository contains the pipelines for data processing, codes for data analysis and plotting for the large-scale MCD data analysis.
 Data for this project is available on [NIMH Data Archive (NDA) under study 1484](https://nda.nih.gov/study.html?id=1484), and on NIMH Sequence Read Archive (SRA) under accession number [PRJNA821916](https://trace.ncbi.nlm.nih.gov/Traces/study/?acc=PRJNA821916&o=acc_s%3Aa).
 
