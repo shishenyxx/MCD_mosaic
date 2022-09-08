@@ -68,6 +68,6 @@ Passed variants were further annotated with [a pipeline we previously described]
 
 ### 7. Cite the data and codes:
 
- <b>Chung C & Yang X, <i>et al.,</i> Gleeson JG. [Comprehensive multiomic profiling of somatic mutations in malformations of cortical development.](https://www.biorxiv.org/content/10.1101/2022.04.07.487401v2.full) 2021. (<i>bioRxiv</i>, DOI:[10.1101/2022.04.07.487401](https://doi.org/10.1101/2022.04.07.487401))</b>
+<b>Chung C & Yang X, <i>et al.,</i> Gleeson JG. [Comprehensive multiomic profiling of somatic mutations in malformations of cortical development.](https://www.biorxiv.org/content/10.1101/2022.04.07.487401v2.full) 2022. (<i>bioRxiv</i>, DOI:[10.1101/2022.04.07.487401](https://doi.org/10.1101/2022.04.07.487401))</b>
 
 
