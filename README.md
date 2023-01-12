@@ -71,6 +71,6 @@ Codes and strategies for TASeq are available on [GitHub](https://github.com/shis
 
 ### 7. Cite the data and codes:
 
-<b>Chung C & Yang X, <i>et al.,</i> Gleeson JG. [Comprehensive multiomic profiling of somatic mutations in malformations of cortical development.](https://www.biorxiv.org/content/10.1101/2022.04.07.487401v2.full) 2022. (<i>bioRxiv</i>, DOI:[10.1101/2022.04.07.487401](https://doi.org/10.1101/2022.04.07.487401))</b>
+<b>Chung C & Yang X, <i>et al.,</i> Gleeson JG. [Comprehensive multi-omic profiling of somatic mutations in malformations of cortical development.](https://www.nature.com/articles/s41588-022-01276-9) 2022. (<i>Nat. Genet.</i>, DOI:[10.1038/s41558-022-01276-9](https://doi.org/10.1038/s41558-022-01276-9))</b>
 
 
