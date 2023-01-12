@@ -25,6 +25,11 @@ Passed variants were further annotated with [a pipeline we previously described]
 
 -----------------------------------
 
+### 4. Validation with TASeq
+
+Codes and strategies for TASeq are available on [GitHub](https://github.com/shishenyxx/PASM).
+
+-----------------------------------
 ### 4. Plotting
 [Codes](https://github.com/shishenyxx/MCD_mosaic/tree/main/Plotting) and inputs for the plots in the project.
 
