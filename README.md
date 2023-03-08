@@ -4,6 +4,8 @@
 Malformations of cortical development (MCD) are neurological conditions displaying focal disruption of cortical architecture and disrupted cellular organization that occurs during embryogenesis. This repository contains the pipelines for data processing, codes for data analysis and plotting for the large-scale MCD data analysis.
 Data for this project is available on NIMH Data Archive (NDA) under study [accession 1484](https://nda.nih.gov/study.html?id=1484), and on NIMH Sequence Read Archive (SRA) under accession number [PRJNA821916](https://trace.ncbi.nlm.nih.gov/Traces/study/?acc=PRJNA821916&o=acc_s%3Aa). Raw single cell RNA-seq data are provided on [the Single Cell Portal](https://singlecell.broadinstitute.org/single_cell/study/SCP1815/comprehensive-multiomic-pro[…]tic-mutations-in-malformations-of-cortical-development). 
 
+<img src="https://user-images.githubusercontent.com/17311837/223873932-13bc4a7e-eaf1-46b0-b0db-b365a49432b1.png" alt="Nature_Genetics_Cover" width=50%> 
+
 -----------------------------------
 
 ### 1. Pipelines for processing WES data
@@ -72,5 +74,3 @@ Codes and strategies for TASeq are available on [GitHub](https://github.com/shis
 ### 7. Cite the data and codes:
 
 <b>Chung C & Yang X, <i>et al.,</i> Gleeson JG. [Comprehensive multi-omic profiling of somatic mutations in malformations of cortical development.](https://www.nature.com/articles/s41588-022-01276-9) 2022. (<i>Nat. Genet.</i>, DOI:[10.1038/s41558-022-01276-9](https://doi.org/10.1038/s41558-022-01276-9))</b>
-
-<img src="https://user-images.githubusercontent.com/17311837/223873932-13bc4a7e-eaf1-46b0-b0db-b365a49432b1.png" alt="Nature_Genetics_Cover" width=50%> 
