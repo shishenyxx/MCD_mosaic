@@ -73,4 +73,4 @@ Codes and strategies for TASeq are available on [GitHub](https://github.com/shis
 
 <b>Chung C & Yang X, <i>et al.,</i> Gleeson JG. [Comprehensive multi-omic profiling of somatic mutations in malformations of cortical development.](https://www.nature.com/articles/s41588-022-01276-9) 2022. (<i>Nat. Genet.</i>, DOI:[10.1038/s41558-022-01276-9](https://doi.org/10.1038/s41558-022-01276-9))</b>
 
-
+<img src="https://user-images.githubusercontent.com/17311837/223873932-13bc4a7e-eaf1-46b0-b0db-b365a49432b1.png" alt="Nature_Genetics_Cover" width=50%> 
