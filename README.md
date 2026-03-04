@@ -63,9 +63,9 @@ Codes and strategies for TASeq are available on [GitHub](https://github.com/shis
 
 ### 6. Contact:
 
-:email: Changuk Chung: [chchung@health.ucsd.edu](mailto:chchung@health.ucsd.edu)
+:email: Changuk Chung: [chchung@chchuk@kaist.ac.kr](mailto:chchuk@kaist.ac.kr)
 
-:email: Xiaoxu Yang: [xiy010@health.ucsd.edu](mailto:xiy010@health.ucsd.edu), [yangxiaoxu-shishen@hotmail.com](mailto:yangxiaoxu-shishen@hotmail.com)
+:email: Xiaoxu Yang: [xiaoxu.yang@genetics.utah.edu](mailto:xiaoxu.yang@genetics.utah.edu), or the Yang lab [xiaoxuyanglab@gmail.com](mailto:xiaoxuyanglab@gmail.com)
 
 :email: Joseph Gleeson: [jogleeson@health.ucsd.edu](mailto:jogleeson@health.ucsd.edu), or the Gleeson lab [gleesonlab@health.ucsd.edu](gleesonlab@health.ucsd.edu)
 
